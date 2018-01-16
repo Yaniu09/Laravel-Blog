@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/blogpost/create/success', 'PostController@store');
     Route::get('/blogs/{post}', 'PostController@show'); 
     Route::get('/blogs/{post}/edit', 'PostController@edit');
-    Route::get('/blogs/{post}/edit/success', 'PostController@update');
+    Route::post('/blogs/{post}/edit', 'PostController@update');
     Route::get('/blogs/{post}/delete', 'PostController@destroy');
 
 

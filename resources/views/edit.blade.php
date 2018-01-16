@@ -46,7 +46,7 @@
             </div>
 <h1>Edit Blog Post</h1>
 <!-- use enctype="multipart/form-data"  if uploading any photo for the blog -->
-        <form method="POST" action="/blogs/{{ $post->id }}/edit/success">
+        <form method="POST" action="{{ url()->current() }}">
           {{ csrf_field() }}
             <div class="form-group">
               <label for="title">Title</label>

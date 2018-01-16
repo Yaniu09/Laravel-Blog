@@ -58,7 +58,7 @@
             </div>
              <div class="form-group">
               <label for="image">Upload Image</label>
-              <input type="file" name="image">
+              <input type="file" name="image[]" multiple>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Submit</button>

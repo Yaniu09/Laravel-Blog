@@ -59,22 +59,30 @@ class PostController extends Controller
             'user_id' => auth()->id(),
         ]);
         
-        $file = $request->image;
-    
-        $file_name = $file->getClientOriginalName();
-    
-        $location = "/images";
-    
-        $url_original = Upload::upload_original($file, $file_name, $location);
-    
-        $url_thumbnail = Upload::upload_thumbnail($file, $file_name, $location);
-        
-        Post_photo::create([
-            'post_id' => $post->id,
-            'main' => '1',
-            'url_original' => $url_original,
-            'url_thumbnail' => $url_thumbnail,
-        ]);
+        $files = $request->image;
+        $i = 0;
+        foreach ($files as $file) {
+
+            $i++;
+
+            $m = ($i == '1') ? '1' : '0';
+
+            $file_name = $file->getClientOriginalName();
+
+            $location = "/images";
+
+            $url_original = Upload::upload_original($file, $file_name, $location);
+
+            $url_thumbnail = Upload::upload_thumbnail($file, $file_name, $location);
+            
+            Post_photo::create([
+                'post_id' => $post->id,
+                'main' => $m,
+                'url_original' => $url_original,
+                'url_thumbnail' => $url_thumbnail,
+            ]);
+           
+        }
        
         return redirect('blogpost/create')->with('alert-success', 'Successfully added new blog post');
         
@@ -118,6 +126,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
@@ -132,6 +141,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $photos = $post->photos;
+        if(!$photos->isEmpty()) {
+            foreach($photos as $photo) {
+                Upload::delete_image($photo->url_original);
+                Upload::delete_image($photo->url_thumbnail);
+                $photo->delete();
+            }
+        }
         $post->delete();
+        return 'Deleted';
     }
 }
