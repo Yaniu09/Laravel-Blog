@@ -2,7 +2,7 @@
 
 ## Laravel Based Blog with Admin interface and Image Upload.
 
-1) First of all clone https://github.com/Yaniu09/Laravel-Blog.git or download the .zip file.
+1) First clone using `git clone https://github.com/Yaniu09/Laravel-Blog.git` or download the .zip file.
 
 2) Run `composer install`
 
