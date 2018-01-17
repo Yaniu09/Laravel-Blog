@@ -12,12 +12,21 @@
 
 5) Setup the database and migrate the files using the Command line `php artisan migrate`
 
-6) Add the following line to the `.env` file
+6) Add the following line to the `.env` file if you want to upload it to the public
 
  ```
  UPLOAD_TYPE='public'
  ```
+#### OR
 
+If you want to upload is to Amazon Web Service S3 add the line below to the `.env` file
+```
+UPLOAD_TYPE='s3'
 
+AWS_KEY=XXXXXXXXXXXXXXXXXXXX
+AWS_SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+AWS_REGION=XXXXXXXXXX
+AWS_BUCKET=XXXXXXXXXXX
+```
 
 
